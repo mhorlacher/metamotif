@@ -78,6 +78,6 @@ def plot_motif(motif_2d, sigma=['A', 'C', 'G', 'T']):
     logo.style_spines(spines=['left', 'bottom'], visible=True)
 
     # style using Axes methods
-    logo.ax.set_ylabel("IG Attribution", labelpad=-1)
+    logo.ax.set_ylabel("", labelpad=-1)
 
     return logo
