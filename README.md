@@ -1,11 +1,11 @@
-# Metamotif: Extracting Consensus Sequence Motifs (Inspired by DeepRiPe<sup>1</sup>)
+## Metamotif: Extracting Consensus Sequence Motifs (Inspired by DeepRiPe<sup>1</sup>)
 
-## Installation
+### Installation
 ```
 pip install git+https://github.com/mhorlacher/metamotif.git
 ```
 
-## Example Usage
+### Example Usage
 
 ```
 import metamotif
