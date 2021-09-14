@@ -1,4 +1,4 @@
-## Metamotif: Extracting Consensus Sequence Motifs (Inspired by DeepRiPe<sup>1</sup>)
+## Metamotif: Consensus Sequence Motifs (Inspired by DeepRiPe<sup>1</sup>)
 
 ### Installation
 ```
