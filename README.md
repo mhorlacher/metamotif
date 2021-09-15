@@ -21,12 +21,7 @@ for m in meta_motifs[:10]:
     metamotif.plot_motif(m)
 ```
 
-
-
-
-
-
-
+*A more detailed example can be found in the [example.ipynb](https://github.com/mhorlacher/metamotif/blob/main/setup.py/example.ipynb) notebook.*
 
 ---
 ### References
