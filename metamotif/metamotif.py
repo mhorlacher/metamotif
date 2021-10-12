@@ -75,7 +75,7 @@ def extract_meta_motifs(importances, k=7, embed_fn=None, clust_fn=None):
     return motifs_metaclusters
 
 # %%
-def plot_motif(motif_2d, sigma=['A', 'C', 'G', 'T']):
+def plot_motif(motif_2d, sigma=['A', 'C', 'G', 'T'], title=''):
     motif_2d_df = pd.DataFrame(motif_2d, columns=sigma)
 
     # create Logo object
@@ -87,5 +87,6 @@ def plot_motif(motif_2d, sigma=['A', 'C', 'G', 'T']):
 
     # style using Axes methods
     logo.ax.set_ylabel("", labelpad=-1)
+    logo.ax.set_title(title)
 
     return logo
