@@ -20,6 +20,8 @@ def motif_point_similarity(pwm_1, pwm_2, boolean_mask=None, weights=None, sim_fn
         tf.Tensor: Scalar of motif similarity. In range [0, 1] in case of jsd1m. 
     """
     
+    pwm_1, pwm_2 = tf.cast(pwm_1, tf.float64), tf.cast(pwm_2, tf.float64)
+    
     tf.debugging.assert_equal(pwm_1.shape, pwm_1.shape)
     
     sim = sim_fn(pwm_1, pwm_2)
@@ -65,20 +67,26 @@ def sliding_window_view(x, window_size):
     return windows
 
 # %%
-@tf.function
-def pwm_padded_windows(pwm, padding=0):
-    """Pads the input position-weight matrix and returns sliding windows of the original PWM length. 
+@tf.function()
+def tf_sliding_window_view(x, window_size):
+    """TF version of sliding_window_view."""
+    
+    return tf.py_function(func=sliding_window_view, inp=[x, window_size], Tout=tf.float64)
+
+
+# %%
+@tf.function()
+def pad_pwm(pwm, padding=0):
+    """Pads the input position-weight matrix. 
 
     Args:
         pwm (tf.Tensor): Input PWM.
         padding (int, optional): Padding size. Defaults to 0.
 
     Returns:
-        tf.Tensor: Padded sliding windows. 
+        tf.Tensor: Padded PWM. 
     """
-    
-    pwm_pad = tf.pad(pwm, [[padding, padding,], [0, 0]], 'CONSTANT')
-    return tf.py_function(func=sliding_window_view, inp=[pwm_pad, pwm.shape[0]], Tout=tf.float32)
+    return tf.pad(pwm, [[padding, padding,], [0, 0]], 'CONSTANT')
 
 # %%
 @tf.function()
@@ -93,7 +101,7 @@ def make_missing_mask(pwm_1, pwm_2):
         tf.Tensor: 1D binary tensor, indicating which positions are occupied by both PWMs. 
     """
     
-    return tf.cast(tf.logical_and(tf.cast(tf.reduce_sum(pwm_1, axis=1), tf.bool), tf.cast(tf.reduce_sum(pwm_2, axis=1), tf.bool)), tf.float32)
+    return tf.cast(tf.logical_and(tf.cast(tf.reduce_sum(pwm_1, axis=1), tf.bool), tf.cast(tf.reduce_sum(pwm_2, axis=1), tf.bool)), tf.float64)
 
 # %%
 @tf.function()
@@ -129,12 +137,15 @@ def motif_similarity(pwm_1, pwm_2, min_size=3, reduce=tf.reduce_max):
         tf.Tensor: Scalar similarity value between the two PWMs. 
     """
     
+    pwm_1, pwm_2 = tf.cast(pwm_1, tf.float64), tf.cast(pwm_2, tf.float64)
+    
     # assign larger PWM to pwm_1
     if pwm_1.shape[0] < pwm_2.shape[0]:
         pwm_1, pwm_2 = pwm_2, pwm_1
     
     # pad the longer PWM and create sliding windows over it
-    pwm_1_padded_windows = pwm_padded_windows(pwm_1, padding=(pwm_2.shape[0] - min_size))
+    pwm_1_padded = pad_pwm(pwm_1, padding=(pwm_2.shape[0] - min_size))
+    pwm_1_padded_windows = tf_sliding_window_view(pwm_1_padded, window_size=pwm_2.shape[0])
     #print(pwm_1_padded_windows[0])
     
     # tile the shorted PWM to match the number of sliding windows
