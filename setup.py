@@ -18,5 +18,4 @@ setup(name='metamotif',
       install_requires=requirements,
       packages=find_packages(),
       include_package_data=True,
-      data_files = [('example_data', ['metamotif/example_data/QKI.attributions.npy'])],
       zip_safe=False)
