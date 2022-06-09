@@ -1,4 +1,4 @@
-## Metamotif: Consensus Sequence Motifs
+## Metamotif: Motif Similarity
 ### Installation
 ```
 pip install git+https://github.com/mhorlacher/metamotif.git
