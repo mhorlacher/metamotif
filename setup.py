@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 requirements = [
     "pandas",
-    "numpy",
+    "numpy==1.19.5",
     "logomaker",
     "sklearn",
     "umap-learn",
