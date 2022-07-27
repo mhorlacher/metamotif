@@ -1,5 +1,4 @@
-## Metamotif: Consensus Sequence Motifs (Inspired by DeepRiPe<sup>1</sup>)
-
+## Metamotif: Motif Similarity
 ### Installation
 ```
 pip install git+https://github.com/mhorlacher/metamotif.git
@@ -24,5 +23,3 @@ for m in meta_motifs[:10]:
 *A more detailed example can be found in the [example.ipynb](https://github.com/mhorlacher/metamotif/blob/main/example.ipynb) notebook.*
 
 ---
-### References
-[1] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7050519/
