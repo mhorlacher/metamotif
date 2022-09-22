@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 
 requirements = [
     "pandas",
-    "numpy",
+    "numpy==1.19.5",
     "logomaker",
     "sklearn",
     "umap-learn",
 ]
 
 setup(name='metamotif',
-      version='0.1',
+      version='0.2',
       description='metamotif',
       url='http://github.com/mhorlacher/metamotif',
       author='Marc Horlacher',
@@ -18,5 +18,4 @@ setup(name='metamotif',
       install_requires=requirements,
       packages=find_packages(),
       include_package_data=True,
-      data_files = [('example_data', ['metamotif/example_data/QKI.attributions.npy'])],
       zip_safe=False)

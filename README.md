@@ -1,5 +1,4 @@
-## Metamotif: Consensus Sequence Motif Construction
-
+## Metamotif: Motif Similarity
 ### Installation
 ```
 pip install git+https://github.com/mhorlacher/metamotif.git
@@ -22,3 +21,5 @@ for m in meta_motifs[:10]:
 ```
 
 *A more detailed example can be found in the [example.ipynb](https://github.com/mhorlacher/metamotif/blob/main/example.ipynb) notebook.*
+
+---
