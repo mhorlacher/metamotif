@@ -9,7 +9,7 @@ requirements = [
 ]
 
 setup(name='metamotif',
-      version='0.1',
+      version='0.2',
       description='metamotif',
       url='http://github.com/mhorlacher/metamotif',
       author='Marc Horlacher',
