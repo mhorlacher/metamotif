@@ -36,9 +36,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('kmer_csv')
     parser.add_argument('--min-support', type=int, default=100)
+    # parser.add_argument('--total-support', type=int, default=None)
     parser.add_argument('--max-motifs', type=int, default=5)
-    parser.add_argument('-o', '--output-directory')
+    # parser.add_argument('-o', '--output-directory')
+    parser.add_argument('-o', '--output-prefix')
     args = parser.parse_args()
+
+    # set total support
+    total_support = len(load_kmers(args.kmer_csv, to_onehot=False))
     
     # load kmers
     kmers = load_kmers(args.kmer_csv)
@@ -48,17 +53,18 @@ def main():
     motifs = find_motifs(kmers)
     
     # save/plot motifs
-    output = Path(args.output_directory)
-    output.mkdir(exist_ok=True)
+    output_prefix = Path(args.output_prefix)
+    output_prefix.parent.mkdir(exist_ok=True)
     for i, motif in enumerate(sorted(motifs, key = lambda x: x.support, reverse=True)):
         if i >= args.max_motifs:
             break
         if motif.support < args.min_support:
             break
         
-        write_motif_tsv(motif.pwm, filepath=(output / f'motif-{i}.tsv'), meta_info={'support': motif.support})
-        fig = plot_motif(motif.pwm, ylab = 'Occupancy', title=f'{motif.support}/5000') # {len(kmers)}
-        fig.savefig(output / f'motif-{i}.pdf', bbox_inches='tight')
+        write_motif_tsv(motif.pwm, filepath=(output_prefix.format(i=i) + '.tsv'), meta_info={'support': motif.support})
+        fig = plot_motif(motif.pwm, ylab = 'Occupancy', title=f'{motif.support}/{total_support}') # {len(kmers)}
+        fig.savefig((output_prefix.format(i=i) + '.pdf'), bbox_inches='tight')
+        fig.savefig((output_prefix.format(i=i) + '.png'), bbox_inches='tight')
 
 # %%
 if __name__ == '__main__':
