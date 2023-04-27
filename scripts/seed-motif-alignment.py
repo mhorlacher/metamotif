@@ -55,6 +55,7 @@ def main():
     # save/plot motifs
     output_prefix = Path(args.output_prefix)
     output_prefix.parent.mkdir(exist_ok=True)
+    output_prefix = str(output_prefix)
     for i, motif in enumerate(sorted(motifs, key = lambda x: x.support, reverse=True)):
         if i >= args.max_motifs:
             break
