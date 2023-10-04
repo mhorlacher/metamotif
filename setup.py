@@ -1,15 +1,10 @@
 from setuptools import setup, find_packages
 
-requirements = [
-    "pandas",
-    "numpy==1.19.5",
-    "logomaker",
-    "sklearn",
-    "umap-learn",
-]
+with open('requirements.txt', 'r') as f:
+    requirements = f.read().splitlines()
 
 setup(name='metamotif',
-      version='0.2',
+      version='0.3',
       description='metamotif',
       url='http://github.com/mhorlacher/metamotif',
       author='Marc Horlacher',
