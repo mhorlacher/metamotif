@@ -2,5 +2,3 @@ tensorflow
 pandas
 numpy
 logomaker
-sklearn
-umap-learn

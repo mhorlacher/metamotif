@@ -13,4 +13,9 @@ setup(name='metamotif',
       install_requires=requirements,
       packages=find_packages(),
       include_package_data=True,
+      entry_points = {
+            'console_scripts': [
+                  'metamotif=metamotif.__main__:main',
+            ],
+      },
       zip_safe=False)
