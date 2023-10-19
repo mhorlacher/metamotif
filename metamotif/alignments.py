@@ -3,9 +3,10 @@ import numpy as np
 
 # %%
 class SeededMotifAlignment:
-    def __init__(self, seed, size=5, min_agreement=3):
+    # def __init__(self, seed, size=5, min_agreement=3):
+    def __init__(self, seed, min_agreement=3):
         # params
-        self.size = size
+        self.size = len(seed)
         self.min_agreement = min_agreement
         self.padding = self.size - self.min_agreement
         self.extended_size = self.size + 2 * self.padding

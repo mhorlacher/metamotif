@@ -1,6 +1,4 @@
-tensorflow,
-pandas,
-numpy,
-logomaker,
-sklearn,
-umap-learn,
+tensorflow
+pandas
+numpy
+logomaker

@@ -4,7 +4,7 @@ with open('requirements.txt', 'r') as f:
     requirements = f.read().splitlines()
 
 setup(name='metamotif',
-      version='0.3',
+      version='0.4.0',
       description='metamotif',
       url='http://github.com/mhorlacher/metamotif',
       author='Marc Horlacher',
@@ -13,4 +13,9 @@ setup(name='metamotif',
       install_requires=requirements,
       packages=find_packages(),
       include_package_data=True,
+      entry_points = {
+            'console_scripts': [
+                  'metamotif=metamotif.__main__:main',
+            ],
+      },
       zip_safe=False)
