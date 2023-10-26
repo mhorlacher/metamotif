@@ -1,2 +1,2 @@
 # %%
-from . import alignments, utils, visualize
+from . import alignment, utils, visualize
