@@ -52,7 +52,7 @@ Put simply, for a given sequence with corresponding importance scores, `metamoti
 The process continues until all significant informative subsequences of maximum length are identified. 
 This way, `metamotif search` can identify a variable number of subsequences with variable length. 
 
-
+![RBPNet](assets/workflow.png)
 
 --- 
 
