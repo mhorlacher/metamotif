@@ -1,6 +1,5 @@
 # %%
 import numpy as np
-import tensorflow as tf
 
 # %%
 base2int = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
@@ -9,6 +8,11 @@ def sequence2int(sequence):
     return [base2int.get(base, 999) for base in sequence]
 
 def sequence2onehot(sequence, sigma='ACGT'):
+    try:
+        import tensorflow as tf
+    except ImportError:
+        raise ImportError('tensorflow is required for onehot encoding')
+
     _sigma_to_int = dict(zip(sigma, range(len(sigma))))
     return tf.one_hot([_sigma_to_int.get(x, -1) for x in sequence], depth=len(sigma)).numpy()
 
