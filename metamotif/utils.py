@@ -58,3 +58,35 @@ def write_motif_tsv(motif_array, filepath, sigma=['A', 'C', 'G', 'U'], meta_info
         print('\t'.join(sigma), file=f)
         for row in motif_array:
             print('\t'.join(map(str, row)), file=f)
+
+# %%
+def pad_matrix(matrix, padding_left=0, padding_right=0):
+    """Pads the input position-weight matrix. 
+
+    Args:
+        matrix (tf.Tensor): Input matrix.
+        padding (int, optional): Padding size. Defaults to 0.
+
+    Returns:
+        tf.Tensor: Padded PWM. 
+    """
+
+    try:
+        import tensorflow as tf
+    except ImportError:
+        raise ImportError('tensorflow is required for padding')
+
+    return tf.pad(matrix, [[padding_left, padding_right,], [0, 0]], 'CONSTANT').numpy()
+
+def remove_padding(matrix, padding_value=0):
+    """Removes padding from the input matrix. 
+
+    Args:
+        matrix (tf.Tensor): Input matrix.
+        padding_value (int, optional): Padding value. Defaults to 0.
+
+    Returns:
+        tf.Tensor: Padded matrix. 
+    """
+    matrix = np.array(matrix)
+    return matrix[np.sum(matrix, axis=1) != padding_value]
