@@ -4,7 +4,7 @@ with open('requirements.txt', 'r') as f:
     requirements = f.read().splitlines()
 
 setup(name='metamotif',
-      version='0.5.0',
+      version='0.6.0',
       description='metamotif',
       url='http://github.com/mhorlacher/metamotif',
       author='Marc Horlacher',
