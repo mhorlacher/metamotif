@@ -45,15 +45,17 @@ def search(scores, sig_p=0.01, seed_size=2, max_size=20, extend_flanks=0):
                 current_kmer_sig = True
                 extend_size += 1
                 current_kmer_size = seed_size + 2*extend_size
-                current_kmer_score = np.sum(scores_cpy[(i+extend_size):(i+2+extend_size)])
+                current_kmer_score = np.mean(scores_cpy[(i+extend_size):(i+2+extend_size)]) # or np.sum?
             else:
                 break
         
         if current_kmer_sig: # only if kmer was significant
-            kmer_start, kmer_stop = i-extend_size+1-extend_flanks, i+seed_size+extend_size+2-1+extend_flanks # get kmer range
+            kmer_start, kmer_stop = max(0, i-extend_size+1-extend_flanks), min(i+seed_size+extend_size+2-1+extend_flanks, len(scores)) # get kmer range
             scores_cpy[kmer_start:kmer_stop] = -np.inf # mask kmer
             # print('size:', current_kmer_size)
             # print((kmer_start, kmer_stop))
             discovered_kmers.append((kmer_start, kmer_stop))
+
+    # TODO: merge overlapping kmers
 
     return discovered_kmers
